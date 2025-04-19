@@ -1,0 +1,59 @@
+"use client"
+
+import { useState } from "react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { TiktokGenerator } from "@/components/platforms/tiktok/tiktok-generator"
+import { TiktokAnalyzer } from "@/components/platforms/tiktok/tiktok-analyzer"
+import { TiktokTools } from "@/components/platforms/tiktok/tiktok-tools"
+import { TiktokTrending } from "@/components/platforms/tiktok/tiktok-trending"
+import { Sparkles, BarChart, Wrench, TrendingUp } from "lucide-react"
+
+export function TiktokContent() {
+  const [activeTab, setActiveTab] = useState("generator")
+
+  return (
+    <div className="p-6">
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold mb-2">TikTok Hashtag Optimizer</h2>
+        <p className="text-muted-foreground">Generate and analyze the perfect hashtags for your TikTok videos</p>
+      </div>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto">
+          <TabsTrigger value="generator" className="flex items-center gap-2 py-3">
+            <Sparkles className="h-4 w-4" />
+            <span className="hidden sm:inline">Generator</span>
+          </TabsTrigger>
+          <TabsTrigger value="analyzer" className="flex items-center gap-2 py-3">
+            <BarChart className="h-4 w-4" />
+            <span className="hidden sm:inline">Analyzer</span>
+          </TabsTrigger>
+          <TabsTrigger value="tools" className="flex items-center gap-2 py-3">
+            <Wrench className="h-4 w-4" />
+            <span className="hidden sm:inline">Tools</span>
+          </TabsTrigger>
+          <TabsTrigger value="trending" className="flex items-center gap-2 py-3">
+            <TrendingUp className="h-4 w-4" />
+            <span className="hidden sm:inline">Trending</span>
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="generator" className="mt-6 focus-visible:outline-none focus-visible:ring-0">
+          <TiktokGenerator />
+        </TabsContent>
+
+        <TabsContent value="analyzer" className="mt-6 focus-visible:outline-none focus-visible:ring-0">
+          <TiktokAnalyzer />
+        </TabsContent>
+
+        <TabsContent value="tools" className="mt-6 focus-visible:outline-none focus-visible:ring-0">
+          <TiktokTools />
+        </TabsContent>
+
+        <TabsContent value="trending" className="mt-6 focus-visible:outline-none focus-visible:ring-0">
+          <TiktokTrending />
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
