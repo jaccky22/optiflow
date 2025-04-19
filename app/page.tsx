@@ -18,7 +18,7 @@ export default function HomePage() {
       
       {/* Ad after hero */}
       <AdSense
-        adClient="pub-5760370419762495"
+        adClient="ca-pub-5760370419762495"
         adSlot="4855988487"
         adFormat="auto"
         className="mb-8"
@@ -30,8 +30,8 @@ export default function HomePage() {
 
       {/* Ad after platform tools */}
       <AdSense
-        adClient="pub-5760370419762495"
-        adSlot="4855988487"
+        adClient="ca-pub-5760370419762495"
+        adSlot="6532655284"
         adFormat="auto"
         className="mb-8"
       />

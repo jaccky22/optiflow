@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from "react"
 
+// Declare global AdSense type
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
+}
+
 interface AdSenseProps {
   adSlot: string
   adClient: string
@@ -27,7 +34,7 @@ export function AdSense({
       // Load the Google AdSense script if it hasn't been loaded yet
       if (!window.adsbygoogle) {
         const script = document.createElement("script")
-        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + adClient
         script.async = true
         script.crossOrigin = "anonymous"
         script.onload = () => {
@@ -47,6 +54,17 @@ export function AdSense({
       console.error("Error loading AdSense script:", err)
     }
   }, [])
+  
+  // Initialize the ad after the component mounts and when loading is complete
+  useEffect(() => {
+    if (!loading && !error && window.adsbygoogle) {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (err) {
+        console.error("Error initializing AdSense ad:", err);
+      }
+    }
+  }, [loading, error])
 
   if (loading) {
     return (
@@ -63,16 +81,12 @@ export function AdSense({
   return (
     <div className={`adsense-container ${className}`}>
       <ins
-        className="adsbygoogle"
-        style={{
-          display: "block",
-          width: adWidth,
-          height: adHeight,
-        }}
+        className={`adsbygoogle block w-full`}
         data-ad-client={adClient}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
         data-full-width-responsive="true"
+        style={{ minHeight: adHeight + 'px' }} // Minimum height needed for proper rendering
       ></ins>
     </div>
   )

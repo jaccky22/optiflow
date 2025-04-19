@@ -20,7 +20,7 @@ export function PlatformTabs() {
     <section id="platforms" className="w-full">
       <AdSense
         adClient="ca-pub-5760370419762495"
-        adSlot="4855988487"
+        adSlot="7913322081"
         adFormat="auto"
         className="mb-8"
       />
